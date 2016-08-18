@@ -15,10 +15,16 @@ namespace VIN2Chassis_Converter
         public void getChassis()
         {
             var f = mainForm.ActiveForm as mainForm;
-            
-            if(f.modelBox.SelectedIndex < 0)
+
+            //Remove first 'if' statement when project is complete
+            if (f.yearBox.SelectedIndex >= 14) //2001 NOT ADDED YET
             {
-                throwError();
+                throwError(2);
+                return;
+            }
+            else if (f.modelBox.SelectedIndex < 0)
+            {
+                throwError(1);
                 return;
             }
 
@@ -42,15 +48,33 @@ namespace VIN2Chassis_Converter
         public void updateModel()
         {
             var f = mainForm.ActiveForm as mainForm;
+
+            //Remove 'if' statement when project is complete
+            if(f.yearBox.SelectedIndex >= 14) //2001 NOT ADDED YET
+            {
+                f.modelBox.DataSource = null;
+                f.modelBox.Items.Clear();
+                return;
+            }
+
             c.setModel(f.yearBox.SelectedIndex);
             c.setChassis(f.yearBox.SelectedIndex);
             f.modelBox.DataSource = chassis.model;
         }
 
-        public void throwError()
+        public void throwError(int errorType)
         {
-            mainForm.errorThrown = true;
-            MessageBox.Show("Error: Please select a model type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if(errorType == 1) //No model has been selected.
+            {
+                mainForm.errorThrown = true;
+                MessageBox.Show("Error: Please select a model type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (errorType == 2) //Selected year that has not been added yet.
+            {
+                mainForm.errorThrown = true;
+                MessageBox.Show("Error: Year 2001 and under is not yet added.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
     }
 }
