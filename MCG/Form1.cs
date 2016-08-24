@@ -63,7 +63,9 @@ namespace VIN2Chassis_Converter
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
-            carInfo.Rows.Clear(); 
+            carInfo.Rows.Clear();
+            modelBox.DataSource = null;
+            modelBox.Items.Clear();
         }
         
         private void carInfo_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

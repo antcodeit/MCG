@@ -16,13 +16,8 @@ namespace VIN2Chassis_Converter
         {
             var f = mainForm.ActiveForm as mainForm;
 
-            //Remove first 'if' statement when project is complete
-            if (f.yearBox.SelectedIndex >= 14) //2001 NOT ADDED YET
-            {
-                throwError(2);
-                return;
-            }
-            else if (f.modelBox.SelectedIndex < 0)
+            //If no model is selected
+            if (f.modelBox.SelectedIndex < 0)
             {
                 throwError(1);
                 return;
@@ -48,14 +43,6 @@ namespace VIN2Chassis_Converter
         public void updateModel()
         {
             var f = mainForm.ActiveForm as mainForm;
-
-            //Remove 'if' statement when project is complete
-            if(f.yearBox.SelectedIndex >= 14) //2001 NOT ADDED YET
-            {
-                f.modelBox.DataSource = null;
-                f.modelBox.Items.Clear();
-                return;
-            }
 
             c.setModel(f.yearBox.SelectedIndex);
             c.setChassis(f.yearBox.SelectedIndex);
