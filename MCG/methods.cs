@@ -54,12 +54,12 @@ namespace VIN2Chassis_Converter
             if(errorType == 1) //No model has been selected.
             {
                 mainForm.errorThrown = true;
-                MessageBox.Show("Error: Please select a model type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: Please select a model.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (errorType == 2) //Selected year that has not been added yet.
+            else if (errorType == 2) //No year has been selected.
             {
                 mainForm.errorThrown = true;
-                MessageBox.Show("Error: Year 2001 and under is not yet added.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: Please select a year.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
         }

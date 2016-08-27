@@ -84,7 +84,7 @@
             this.yearBox.Size = new System.Drawing.Size(140, 21);
             this.yearBox.TabIndex = 0;
             this.yearBox.SelectedIndexChanged += new System.EventHandler(this.yearBox_SelectedIndexChanged);
-            this.yearBox.TextUpdate += new System.EventHandler(this.yearBox_TextUpdate);
+            this.yearBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.yearBox_KeyDown);
             // 
             // modelBox
             // 
@@ -96,6 +96,7 @@
             this.modelBox.Name = "modelBox";
             this.modelBox.Size = new System.Drawing.Size(140, 21);
             this.modelBox.TabIndex = 1;
+            this.modelBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.modelBox_KeyDown);
             // 
             // carInfo
             // 
@@ -194,6 +195,7 @@
             this.MaximizeBox = false;
             this.Name = "mainForm";
             this.Text = "Mercedes-Benz Chassis Grab";
+            this.Activated += new System.EventHandler(this.mainForm_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.carInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

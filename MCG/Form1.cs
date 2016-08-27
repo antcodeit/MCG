@@ -29,9 +29,12 @@ namespace VIN2Chassis_Converter
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
         }
 
-        private void yearBox_TextUpdate(object sender, EventArgs e)
+        private void clearCmboBox()
         {
-            m.updateModel();
+            yearBox.SelectedIndex = -1;
+            modelBox.DataSource = null;
+            modelBox.Items.Clear();
+            yearBox.Select();
         }
 
         private void yearBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,10 +67,39 @@ namespace VIN2Chassis_Converter
         private void clearBtn_Click(object sender, EventArgs e)
         {
             carInfo.Rows.Clear();
-            modelBox.DataSource = null;
-            modelBox.Items.Clear();
+            clearCmboBox();
         }
-        
+
+        private void mainForm_Activated(object sender, EventArgs e)
+        {
+            yearBox.Select();
+        }
+
+        private void yearBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                if (yearBox.SelectedIndex >= 0)
+                    modelBox.Select();
+                else
+                    m.throwError(2);
+            }
+        }
+
+        private void modelBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                if (modelBox.SelectedIndex >= 0)
+                {
+                    submitBtn.PerformClick();
+                    clearCmboBox();
+                }
+                else
+                    m.throwError(1);
+            }
+        }
+
         private void carInfo_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             foreach (DataGridViewRow row in carInfo.SelectedRows)
@@ -119,6 +151,4 @@ namespace VIN2Chassis_Converter
                 return;
         }
     }
-
-   
 }
